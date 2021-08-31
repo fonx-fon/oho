@@ -1,5 +1,7 @@
 import discord
+import random
 import os
+import numpy as np
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 intents = discord.Intents.default()
@@ -14,9 +16,9 @@ def get_members(message):
         # get user name
         for member in message.guild.members:
             if member.id in user_ids:
-                users.append(str(member.name))
+                users.append(str(member.display_name))
     return {
-        "author": message.author.name,
+        "author": message.author.display_name,
         "users": users
     }
 
@@ -30,6 +32,11 @@ def warui(user_data):
     else:
         embed = discord.Embed(title="わるいひと", description="*%s*" % user_data["author"], color=discord.Colour.gold())
     return embed
+
+
+def warukunai(user_data):
+    s = np.random.choice(["めっちゃわるいねん", "わるいねん", "わるくないねん"], p=[0.02, 0.48, 0.5])
+    return discord.Embed(title="おれは悪くない", description="%sは%s" % (user_data["author"], s), color=discord.Colour.random())
 
 
 def split_members(comment, user_data):
@@ -109,6 +116,9 @@ async def on_message(message):
             embed = comment_help()
         elif comment.startswith("!わるいひと"):
             embed = warui(users)
+        elif comment.startswith("!おれは悪くない"):
+            embed = warukunai(users)
+
         else:
             return
 
