@@ -1,7 +1,7 @@
 import discord
-import random
+import os
 
-TOKEN = "ODgxODYzMDA5OTUyMjEwOTc1.YSzA7Q.lku4d6LmA9f1JtFr73Qn1bVpMgo"
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 intents = discord.Intents.default()
 intents.members = True
 client = discord.Client(intents=intents)
