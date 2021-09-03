@@ -35,8 +35,11 @@ def warui(user_data):
 
 
 def warukunai(user_data):
-    s = np.random.choice(["めっちゃわるいねん", "わるいねん", "わるくないねん"], p=[0.02, 0.48, 0.5])
-    return discord.Embed(title="おれは悪くない", description="%sは%s" % (user_data["author"], s), color=discord.Colour.random())
+    s = np.random.choice(["めっちゃわるいねん", "わるいねん", "わるくないねん"], p=[0.02, 0.18, 0.8])
+    n = np.random.choice(["(にちゃあ)", ""], p=[0.02, 0.98])
+    return discord.Embed(title="おれは悪くない",
+                         description="%sは%s%s" % (user_data["author"], s, n),
+                         color=discord.Colour.random())
 
 
 def split_members(comment, user_data):
